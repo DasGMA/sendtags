@@ -1,68 +1,63 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### `Send Tags Takehome` 
 
-## Available Scripts
+At Noterouter, we use tags to that are assigned to our clients' users in order determine who we want to send messages to. For this takehome, we created a rudimentary tags system for you to finish and implement.
 
-In the project directory, you can run:
+This React App is partially implemented with inputs defined:
 
-### `npm start`
+> Tags - String "tags" separated by commas that can be thought of as attributes
 
-Runs the app in the development mode.<br />
+> People Configs - A JSON string where the key is the person's name and the value is an array of their associated tags 
+
+> Send To - String "tags" separated by commas that will tell us who we want to send to
+
+> AND/OR? - The conditional clause that tells us which qualifier to use (e.g. send to everyone with "tagA" AND "tagB" or send to people with "tagA" OR "tagB")
+
+Your task is to complete the application where given the inputs from the user, an output of "Sent to" is determined.
+
+For example,
+
+The application might have the following inputs:
+
+> Tags - hero, villain, person, mutant, tough, weak, smart, dumb, short, tall, weird, cool
+
+> People configs - 
+{
+    “Human Torch”: [“hero”, “mutant”, “tough”, “dumb”, “tall”],
+    “Spiderman”: [“hero”, “tough”, “smart”, “tall”],
+    “Kyle”: [“human”, “weak”, “smart”, “short”],
+    “JonJon”: [“human”, “strong”, “smart”, “tall”, “weird”]
+} 
+
+> Send to - “human”, “tall”, “weak”
+
+> AND/OR? - OR
+
+Then the Output would be: 
+> `"Send To: Human Torch, Spiderman, JonJon, Kyle"`
+
+
+
+Assumptions you can make:
+- Inputs to the forms will be text, meaning we won't be inputing them as quoted strings (tagA vs. "tagA") WITH ONE EXCEPTION...
+- The json string for People Configs will be in proper json string format. This is to help make parsing easier
+- You may need external npm libraries for things such as parsing, so feel free to introduce them but make sure you add them to your dependencies so we can `npm install`
+
+
+See Below for a screnshot of what the output should look like:
+![Example](/images/example.png)
+
+
+Bonus Points:
+- Making it fault tolerant (what happens when we put in unexpected inputs)
+- What improvements can you make given your time contraint?
+- Do you plan on writing tests?
+- Will you restructure the code and fix bugs that may be in there?
+- We left some things intentionally vague to see how you deal with them :)
+
+### `npm install && npm start`
+
+Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br />
+The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
