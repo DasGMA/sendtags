@@ -1,4 +1,4 @@
-### `Send Tags Takehome` 
+### `Send Tags Takehome - Deadline/Due: 6.14.20 5:00 PT` 
 
 At Noterouter, we use tags that are assigned to our clients' users in order determine who we want to send messages to. For this takehome, we created a rudimentary Tags system for you to finish and implement.
 
@@ -47,7 +47,7 @@ See below for a screenshot of what the output should look like:
 ![Example](/images/example.png)
 
 
-You should not spend more than 2-4 hours on this assessment. We care much more about the quality of what you're able to get done, and the methodology you followed to do it - rather than how much you get done. With this time constraint in mind, what else besides the bare minimum can you get in before the buzzer?
+This assessment must be submitted by this Sunday, June 14 at 5:00 PT. You should not spend more than 2-4 hours on this assessment. We care much more about the quality of what you're able to get done, and the methodology you followed to do it - rather than how much you get done. With this time constraint in mind, what else besides the bare minimum can you get in before the buzzer?
 Bonus Points:
 - Making it fault tolerant (what happens when we put in unexpected inputs?)
 - Are you good at design? Show off here!
