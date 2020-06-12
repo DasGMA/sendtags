@@ -47,7 +47,7 @@ See Below for a screnshot of what the output should look like:
 ![Example](/images/example.png)
 
 
-We know you have a time constraint but what else besides the bare minimum can you get in before the buzzer?
+You should not spend more than 2-4 hours on this assessment. We care much more about the quality of what you're able to get done, and the methodology you followed to do it - rather than how much you get done. With this time constraint in mind, what else besides the bare minimum can you get in before the buzzer? 
 Bonus Points:
 - Making it fault tolerant (what happens when we put in unexpected inputs?)
 - Are you good at design? Show off here!
