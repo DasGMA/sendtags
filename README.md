@@ -1,8 +1,8 @@
 ### `Send Tags Takehome` 
 
-At Noterouter, we use tags to that are assigned to our clients' users in order determine who we want to send messages to. For this takehome, we created a rudimentary tags system for you to finish and implement.
+At Noterouter, we use tags that are assigned to our clients' users in order determine who we want to send messages to. For this takehome, we created a rudimentary Tags System for you to finish and implement.
 
-This React App is partially implemented with inputs defined:
+This React App is partially implemented with the following inputs defined:
 
 > Tags - String "tags" separated by commas that can be thought of as attributes
 
@@ -33,12 +33,12 @@ The application might have the following inputs:
 > AND/OR? - OR
 
 Then the Output would be: 
-> `"Send To: Human Torch, Spiderman, JonJon, Kyle"`
+> `"Sent to: Human Torch, Spiderman, JonJon, Kyle"`
 
 
 
 Assumptions you can make:
-- Inputs to the forms will be text, meaning we won't be inputing them as quoted strings (tagA vs. "tagA") WITH ONE EXCEPTION...
+- Inputs to the forms will be text, meaning we won't be inputting them as quoted strings (tagA vs. "tagA") WITH ONE EXCEPTION...
 - The json string for People Configs will be in proper json string format. This is to help make parsing easier
 - You may need external npm libraries for things such as parsing, so feel free to introduce them but make sure you add them to your dependencies so we can `npm install`
 
@@ -47,12 +47,13 @@ See Below for a screnshot of what the output should look like:
 ![Example](/images/example.png)
 
 
+We know you have a time constraint but what else besides the bare minimum can you get in before the buzzer?
 Bonus Points:
-- Making it fault tolerant (what happens when we put in unexpected inputs)
-- What improvements can you make given your time contraint?
-- Do you plan on writing tests?
+- Making it fault tolerant (what happens when we put in unexpected inputs?)
+- Are you good at design? Show off here!
+- Not required but if you add tests, what framework will you use to write them and how easy are they to follow?
 - Will you restructure the code and fix bugs that may be in there?
-- We left some things intentionally vague to see how you deal with them :)
+- We left some things intentionally vague to see how you deal with unclear requirements. Sometimes at NR, you have to call the shots :)
 
 ### `npm install && npm start`
 
