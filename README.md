@@ -55,6 +55,9 @@ Bonus Points:
 - Will you restructure the code and fix bugs that may be in there?
 - We left some things intentionally vague to see how you deal with unclear requirements. At NoteRouter, you'll frequently have to call your own shots. :)
 
+### `Submission`
+To submit, please fork the project and create a PR for us to review. We will be pulling these down and running/testing them  locally on our machines.
+
 ### `npm install && npm start`
 
 Runs the app in the development mode.<br>
