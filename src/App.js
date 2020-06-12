@@ -1,23 +1,15 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import SendTags from './SendTags';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header className="App-header" style={{backgroundColor: "#153D5C"}}>
+      <img alt="nr_beta_logo" 
+          src="https://noterouter-staging.firebaseapp.com/static/media/logo.b10c9223.png" 
+          style={{width: '30%'}} />
+        <SendTags />
       </header>
     </div>
   );
