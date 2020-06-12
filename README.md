@@ -1,6 +1,6 @@
 ### `Send Tags Takehome` 
 
-At Noterouter, we use tags that are assigned to our clients' users in order determine who we want to send messages to. For this takehome, we created a rudimentary Tags System for you to finish and implement.
+At Noterouter, we use tags that are assigned to our clients' users in order determine who we want to send messages to. For this takehome, we created a rudimentary Tags system for you to finish and implement.
 
 This React App is partially implemented with the following inputs defined:
 
@@ -43,17 +43,17 @@ Assumptions you can make:
 - You may need external npm libraries for things such as parsing, so feel free to introduce them but make sure you add them to your dependencies so we can `npm install`
 
 
-See Below for a screnshot of what the output should look like:
+See below for a screenshot of what the output should look like:
 ![Example](/images/example.png)
 
 
-We know you have a time constraint but what else besides the bare minimum can you get in before the buzzer?
+You should not spend more than 2-4 hours on this assessment. We care much more about the quality of what you're able to get done, and the methodology you followed to do it - rather than how much you get done. With this time constraint in mind, what else besides the bare minimum can you get in before the buzzer?
 Bonus Points:
 - Making it fault tolerant (what happens when we put in unexpected inputs?)
 - Are you good at design? Show off here!
-- Not required but if you add tests, what framework will you use to write them and how easy are they to follow?
+- If you add tests, what framework will you use to write them and how easy are they to follow?
 - Will you restructure the code and fix bugs that may be in there?
-- We left some things intentionally vague to see how you deal with unclear requirements. Sometimes at NR, you have to call the shots :)
+- We left some things intentionally vague to see how you deal with unclear requirements. At NoteRouter, you'll frequently have to call your own shots. :)
 
 ### `npm install && npm start`
 
