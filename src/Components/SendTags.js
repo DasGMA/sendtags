@@ -10,17 +10,21 @@ import {
     updateSent,
     clearInput,
     submitHandle,
-    checkForErrors
+    resetRecipients,
+    checkForErrors,
+    resetErrors,
 } from "../Redux/Actions/SendTagActions/SendTagActions";
 import Modal from "./Modal";
 
 export default function SendTags() {
     const {
         tags,
+        //sent,
         sendType,
         config,
         sendTo,
-        errors
+        //recipients,
+        errors,
     } = useSelector((state) => state.SendTagReducer.SendTagReducers);
 
     // It is unsafe using dangerouslySetInnerHTML.
@@ -81,6 +85,13 @@ export default function SendTags() {
         }
     };
 
+    const onFocus = (event) => {
+        event.preventDefault();
+        dispatch(resetRecipients());
+        dispatch(updateSent(false));
+        dispatch(resetErrors());
+    };
+
     return (
         <div className="sendTags-container">
             <form className="sendTags-form" onSubmit={handleSubmit}>
@@ -97,6 +108,7 @@ export default function SendTags() {
                         name="tags"
                         value={tags}
                         onChange={handleChange}
+                        onFocus={onFocus}
                     />
                 </label>
                 <label>
@@ -119,6 +131,7 @@ export default function SendTags() {
                         name="config"
                         value={config}
                         onChange={handleChange}
+                        onFocus={onFocus}
                     />
                 </label>
                 <label>
@@ -132,6 +145,7 @@ export default function SendTags() {
                         name="sendTo"
                         value={sendTo}
                         onChange={handleChange}
+                        onFocus={onFocus}
                     />
                 </label>
                 <label>
@@ -148,6 +162,7 @@ export default function SendTags() {
                         name="sendType"
                         value={sendType}
                         onChange={handleChange}
+                        onFocus={onFocus}
                     />
                 </label>
                 <input
