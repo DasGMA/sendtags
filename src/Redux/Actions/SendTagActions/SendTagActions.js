@@ -159,7 +159,10 @@ export const checkForErrors = () => (dispatch, getState) =>{
         dispatch(setErrors('emptyOrAnd', emptyOrAnd));
         hasErrors = true;
     };
-    if (sendType.toLocaleLowerCase() !== 'or' || sendType.toLocaleLowerCase() !== 'and') {
+
+    if (sendType.toLocaleLowerCase() === 'or' || sendType.toLocaleLowerCase() === 'and') {
+        
+    } else {
         dispatch(setErrors('notOrAnd', notOrAnd));
         hasErrors = true;
     }
