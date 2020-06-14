@@ -5,7 +5,10 @@ import {
     UPDATE_SEND_TYPE,
     UPDATE_SENT,
     UPDATE_RECIPIENTS,
-    CLEAR_STATE
+    CLEAR_INPUT,
+    RESET_RECIPIENTS,
+    SET_ERRORS,
+    RESET_ERRORS
 } from '../../Actions/SendTagActions/SendTagActions';
 
 const initialState = {
@@ -52,15 +55,32 @@ const SendTagReducers = (state = initialState, action) => {
                 ...state,
                 recipients: state.recipients.add(payload)
             };
-        case CLEAR_STATE:
+        case RESET_RECIPIENTS:
+            return {
+                ...state,
+                recipients: new Set()
+            };
+        case CLEAR_INPUT:
             return {
                 ...state,
                 tags: '',
                 config: '',
                 sendTo: '',
                 sendType: '',
+            };
+        case SET_ERRORS:
+            return {
+                ...state,
+                errors: {
+                    ...state.errors,
+                    [payload.errorName]: payload.message
+                }
+            };
+        case RESET_ERRORS:
+            return {
+                ...state,
                 errors: {}
-            }
+            };
 
         default:
             return {

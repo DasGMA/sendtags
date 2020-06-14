@@ -1,4 +1,6 @@
 import React from "react";
+import '../Styles/sendTags.scss';
+import dompurify from 'dompurify';
 import { useSelector, useDispatch } from "react-redux";
 import {
     updateTags,
@@ -6,23 +8,31 @@ import {
     updateSendTo,
     updateSendType,
     updateSent,
-    updateRecipients,
-    clearState,
+    clearInput,
+    submitHandle,
+    resetRecipients,
+    checkForErrors,
+    resetErrors,
 } from "../Redux/Actions/SendTagActions/SendTagActions";
 
 export default function SendTags() {
-    const { tags, sent, sendType, config, sendTo, recipients } = useSelector(
+    const { tags, sent, sendType, config, sendTo, recipients, errors } = useSelector(
         (state) => state.SendTagReducer.SendTagReducers
     );
-    console.log({sent, sendTo, sendType, config, recipients})
+
+    // It is unsafe using dangerouslySetInnerHTML.
+    // Using DOMPurify - DOM-only, super-fast, uber-tolerant XSS sanitizer for HTML, MathML and SVG.
+    const sanitizer = dompurify.sanitize;
+    const dangerousHTML = {__html: sanitizer("People Configs (e.g. {“Spiderman”: [“hero”, “tough”, “smart”, “tall”]})")}
+    
     const dispatch = useDispatch();
 
     const handleChange = (event) => {
         // Checking for spaces in TAGS and SEND TO but need think better about that,
         // as tags can be not just one worded.
         if (
-            event.currentTarget.value.includes(" ") &&
-            (event.target.name === "tags" || event.target.name === "sendTo")
+            event.currentTarget.value.includes(' ') &&
+            (event.target.name === 'tags' || event.target.name === 'sendTo' || event.target.name === 'sendType')
         ) {
             event.currentTarget.value = event.currentTarget.value.replace(
                 /\s/g,
@@ -32,16 +42,16 @@ export default function SendTags() {
         const value = event.target.value;
 
         switch (event.target.name) {
-            case "tags":
+            case 'tags':
                 dispatch(updateTags(value));
                 return;
-            case "config":
+            case 'config':
                 dispatch(updateConfig(value));
                 return;
-            case "sendTo":
+            case 'sendTo':
                 dispatch(updateSendTo(value));
                 return;
-            case "sendType":
+            case 'sendType':
                 dispatch(updateSendType(value));
                 return;
             default:
@@ -49,108 +59,80 @@ export default function SendTags() {
         }
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async(event) => {
         event.preventDefault();
         /*  implement me
             hint: we will probably need to update state here to render the right parts
         */
-        // No external library needed to parse the JSON string to object.
-        // React is javascript so use JSON.parse()
-
-        const obj = JSON.parse(config);
-        const tagsArray = sendTo.split(",");
-
-        // OR
-        if (sendType.toLocaleLowerCase() === "or") {
-            for (const person of Object.entries(obj)) {
-                for (const tag of tagsArray) {
-                    if (person[1].includes(tag)) {
-                        dispatch(updateRecipients(person[0]));
-                    }
-                }
-            }
+        
+        if (dispatch(checkForErrors()) === false) {
+            dispatch(submitHandle());
+            dispatch(updateSent(true));
+            dispatch(clearInput());
         }
-        // AND
-        if (sendType.toLocaleLowerCase() === "and") {
-            for (const person of Object.entries(obj)) {
-                if (tagsArray.every((tag) => person[1].includes(tag))) {
-                    dispatch(updateRecipients(person[0]));
-                }
-            }
-        }
-
-        dispatch(updateSent(true));
-        dispatch(clearState());
+        
     };
 
-    const onFocus = () => {
-        updateRecipients(new Set());
+    const onFocus = (event) => {
+        event.preventDefault();
+        dispatch(resetRecipients());
         dispatch(updateSent(false));
+        dispatch(resetErrors());
     };
-
+    
     return (
-        <div>
-            <form onSubmit={handleSubmit} style={{ textAlign: "left" }}>
-                <label style={{ paddingRight: "10px" }}>
-                    <div>
-                        <span style={{ paddingRight: "10px" }}>
-                            Tags (separated by commas):
-                        </span>
-                        <input
-                            type="text"
-                            name="tags"
-                            value={tags}
-                            onChange={handleChange}
-                            onFocus={onFocus}
-                        />
-                    </div>
-                    <div>
-                        <span
-                            style={{ paddingRight: "10px", paddingTop: "20px" }}
-                            dangerouslySetInnerHTML={{
-                                __html:
-                                    "People Configs (e.g. {“Spiderman”: [“hero”, “tough”, “smart”, “tall”]}): ",
-                            }}
-                        ></span>
-                        <input
-                            type="text"
-                            name="config"
-                            value={config}
-                            style={{ width: "500px" }}
-                            onChange={handleChange}
-                            onFocus={onFocus}
-                        />
-                    </div>
-                    <div>
-                        <span
-                            style={{ paddingRight: "10px", paddingTop: "20px" }}
-                        >
-                            Send To:
-                        </span>
-                        <input
-                            type="text"
-                            name="sendTo"
-                            value={sendTo}
-                            onChange={handleChange}
-                            onFocus={onFocus}
-                        />
-                    </div>
-                    <div>
-                        <span
-                            style={{ paddingRight: "10px", paddingTop: "20px" }}
-                        >
-                            AND/OR?:{" "}
-                        </span>
-                        <input
-                            type="text"
-                            name="sendType"
-                            value={sendType}
-                            onChange={handleChange}
-                            onFocus={onFocus}
-                        />
-                    </div>
+        <div className='sendTags-container'>
+            <form className='sendTags-form' onSubmit={handleSubmit}>
+                <label>
+                    <span className='labelName'>Tags (separated by commas)</span>
+                    {errors['emptyTags'] && <span className='error'>{errors['emptyTags']}</span>}
+                    <input
+                        placeholder='Enter TAGS separated by commas'
+                        type="text"
+                        name="tags"
+                        value={tags}
+                        onChange={handleChange}
+                        onFocus={onFocus}
+                    />
                 </label>
-                <input type="submit" value="Send Messages" />
+                <label>
+                    <span className='labelName' dangerouslySetInnerHTML={dangerousHTML} />
+                    <span className='error'>{errors['jsonAttributesError'] && errors['jsonAttributesError']}</span>
+                    <span className='error'>{errors['notValidJSON'] && errors['notValidJSON']}</span>
+                    <textarea
+                        placeholder='Enter a valid JSON format People Config'
+                        rows={4}
+                        cols={50}
+                        type="text"
+                        name="config"
+                        value={config}
+                        onChange={handleChange}
+                        onFocus={onFocus}
+                    />
+                </label>
+                <label>
+                    <span className='labelName'>Send To</span>
+                    <input
+                        placeholder='Enter send to tags separated by commas'
+                        type="text"
+                        name="sendTo"
+                        value={sendTo}
+                        onChange={handleChange}
+                        onFocus={onFocus}
+                    />
+                </label>
+                <label>
+                    <span className='labelName'>AND/OR?</span>
+                    <input
+                        placeholder='Enter AND or OR'
+                        type="text"
+                        name="sendType"
+                        value={sendType}
+                        onChange={handleChange}
+                        onFocus={onFocus}
+                    />
+                </label>
+                <input className='submit-button' type="submit" value="Send Messages" />
             </form>
             {sent && (
                 <div>
