@@ -85,7 +85,7 @@ export default function SendTags() {
             <form className='sendTags-form' onSubmit={handleSubmit}>
                 <label>
                     <span className='labelName'>Tags (separated by commas)</span>
-                    {errors['emptyTags'] && <span className='error'>{errors['emptyTags']}</span>}
+                    <span className='error'>{errors['emptyTags'] && errors['emptyTags']}</span>
                     <input
                         placeholder='Enter TAGS separated by commas'
                         type="text"
@@ -112,6 +112,7 @@ export default function SendTags() {
                 </label>
                 <label>
                     <span className='labelName'>Send To</span>
+                    <span className='error'>{errors['emptySendTo'] && errors['emptySendTo']}</span>
                     <input
                         placeholder='Enter send to tags separated by commas'
                         type="text"
@@ -123,6 +124,8 @@ export default function SendTags() {
                 </label>
                 <label>
                     <span className='labelName'>AND/OR?</span>
+                    <span className='error'>{errors['emptyOrAnd'] && errors['emptyOrAnd']}</span>
+                    <span className='error'>{errors['notOrAnd'] && errors['notOrAnd']}</span>
                     <input
                         placeholder='Enter AND or OR'
                         type="text"
@@ -136,10 +139,9 @@ export default function SendTags() {
             </form>
             {sent && (
                 <div>
-                    Sent to:{" "}
-                    {recipients.size < 1
-                        ? "There are no matching TAGS."
-                        : [...recipients].join(", ")}
+                    <p>Sent to:{" "}
+                    {recipients.size < 1 ? "There are no matching TAGS."
+                        : [...recipients].join(", ")}</p>
                 </div>
             )}
         </div>

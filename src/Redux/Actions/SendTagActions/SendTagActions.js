@@ -109,7 +109,7 @@ export const resetErrors = () => dispatch => {
 
 
 export const checkForErrors = () => (dispatch, getState) =>{
-    const {tags, config, sendTo} = getState().SendTagReducer.SendTagReducers;
+    const {tags, config, sendTo, sendType} = getState().SendTagReducer.SendTagReducers;
     let hasErrors = false;
     let obj = {};
     // TAGS
@@ -144,13 +144,26 @@ export const checkForErrors = () => (dispatch, getState) =>{
         }
     }
 
-    // SEND TYPE
+    // SEND TO
     // Check if sendType is not empty
-    const emptySendTo = 'Send To field is required. Must not be blank.'
+    const emptySendTo = 'Send To field is required. Must not be blank.';
     if (sendTo.length === 0) {
-        dispatch(setErrors('emptySendTo', emptySendTo)); 
+        dispatch(setErrors('emptySendTo', emptySendTo));
         hasErrors = true;
     };
+
+    // SEND TYPE
+    const emptyOrAnd = 'Send To field is required. Must not be blank.';
+    const notOrAnd = 'Must be OR or AND.';
+    if (sendType.length === 0) {
+        dispatch(setErrors('emptyOrAnd', emptyOrAnd));
+        hasErrors = true;
+        if (sendType.toLocaleLowerCase() !== 'or' || sendType.toLocaleLowerCase() !== 'and') {
+            dispatch(setErrors('notOrAnd', notOrAnd));
+            hasErrors = true;
+        }
+    };
+    
 
 
     return hasErrors;
