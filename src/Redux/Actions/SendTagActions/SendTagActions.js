@@ -158,13 +158,11 @@ export const checkForErrors = () => (dispatch, getState) =>{
     if (sendType.length === 0) {
         dispatch(setErrors('emptyOrAnd', emptyOrAnd));
         hasErrors = true;
-        if (sendType.toLocaleLowerCase() !== 'or' || sendType.toLocaleLowerCase() !== 'and') {
-            dispatch(setErrors('notOrAnd', notOrAnd));
-            hasErrors = true;
-        }
     };
+    if (sendType.toLocaleLowerCase() !== 'or' || sendType.toLocaleLowerCase() !== 'and') {
+        dispatch(setErrors('notOrAnd', notOrAnd));
+        hasErrors = true;
+    }
     
-
-
     return hasErrors;
 }
