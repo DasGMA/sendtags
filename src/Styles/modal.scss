@@ -1,0 +1,81 @@
+@import "themeColors";
+
+.modal-container {
+    position: absolute;
+    background-color: transparentize($color: $themeBlack, $amount: 0.6);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    padding: 1rem;
+
+    .inner-modal {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        max-width: 60rem;
+        width: 100%;
+        background-color: $themeBackground;
+        margin: 0 1rem;
+
+        h1 {
+            color: $themeWhite;
+        }
+
+        p {
+            font-size: 2rem;
+        }
+
+        ul {
+
+            li {
+                list-style: disc;
+                color: $themeWhite;
+                font-size: 2rem;
+            }
+        }
+    }
+
+    .button-container {
+        background-color: $themeBackground;
+        max-width: 60rem;
+        width: 100%;
+        padding: 1rem;
+        display: flex;
+        justify-content: center;
+
+        .close-button {
+            background-color: $themeBackground;
+            color: $themeWhite;
+            border-radius: 50%;
+            border: 0.1rem solid $themeWhite;
+            width: 4rem;
+            height: 4rem;
+            font-size: 2rem;
+            font-weight: 300;
+            margin: 1rem;
+            outline: none;
+
+            &:hover {
+                font-size: 2.2rem;
+                font-weight: 700;
+                border: 0.1rem solid $themeYellow;
+                color: $themeYellow;
+                transition-duration: 0.2s;
+            }
+        }
+    }
+}
+
+@keyframes fade {
+    from {
+        opacity: 0
+    }
+    to {
+        opacity: 1
+    }
+}

@@ -10,20 +10,17 @@ import {
     updateSent,
     clearInput,
     submitHandle,
-    resetRecipients,
-    checkForErrors,
-    resetErrors,
+    checkForErrors
 } from "../Redux/Actions/SendTagActions/SendTagActions";
+import Modal from "./Modal";
 
 export default function SendTags() {
     const {
         tags,
-        sent,
         sendType,
         config,
         sendTo,
-        recipients,
-        errors,
+        errors
     } = useSelector((state) => state.SendTagReducer.SendTagReducers);
 
     // It is unsafe using dangerouslySetInnerHTML.
@@ -84,13 +81,6 @@ export default function SendTags() {
         }
     };
 
-    const onFocus = (event) => {
-        event.preventDefault();
-        dispatch(resetRecipients());
-        dispatch(updateSent(false));
-        dispatch(resetErrors());
-    };
-
     return (
         <div className="sendTags-container">
             <form className="sendTags-form" onSubmit={handleSubmit}>
@@ -107,7 +97,6 @@ export default function SendTags() {
                         name="tags"
                         value={tags}
                         onChange={handleChange}
-                        onFocus={onFocus}
                     />
                 </label>
                 <label>
@@ -130,7 +119,6 @@ export default function SendTags() {
                         name="config"
                         value={config}
                         onChange={handleChange}
-                        onFocus={onFocus}
                     />
                 </label>
                 <label>
@@ -144,7 +132,6 @@ export default function SendTags() {
                         name="sendTo"
                         value={sendTo}
                         onChange={handleChange}
-                        onFocus={onFocus}
                     />
                 </label>
                 <label>
@@ -161,7 +148,6 @@ export default function SendTags() {
                         name="sendType"
                         value={sendType}
                         onChange={handleChange}
-                        onFocus={onFocus}
                     />
                 </label>
                 <input
@@ -170,16 +156,7 @@ export default function SendTags() {
                     value="Send Messages"
                 />
             </form>
-            {sent && (
-                <div>
-                    <p>
-                        Sent to:{" "}
-                        {recipients.size < 1
-                            ? "There are no matching TAGS."
-                            : [...recipients].join(", ")}
-                    </p>
-                </div>
-            )}
+            <Modal />
         </div>
     );
 }
