@@ -12,7 +12,7 @@ import {
     submitHandle,
     resetRecipients,
     checkForErrors,
-    resetErrors,
+    resetErrors
 } from "../Redux/Actions/SendTagActions/SendTagActions";
 
 export default function SendTags() {
