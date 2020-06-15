@@ -37,7 +37,7 @@ export default function SendTags() {
         dispatch(changeHandle(event));
     };
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
 
         if (dispatch(checkForErrors()) === false) {
