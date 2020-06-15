@@ -64,7 +64,7 @@ export const clearInput = () => dispatch => {
     })
 }
 
-export const changeHandle = (event) => (dispatch, getState) => {
+export const changeHandle = (event) => dispatch => {
     // Checking for spaces in TAGS and SEND TO but need think better about that,
     // as tags can be not just one worded.
     if (
