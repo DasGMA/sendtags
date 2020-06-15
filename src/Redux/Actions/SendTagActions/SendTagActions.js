@@ -64,6 +64,40 @@ export const clearInput = () => dispatch => {
     })
 }
 
+export const changeHandle = (event) => (dispatch, getState) => {
+    // Checking for spaces in TAGS and SEND TO but need think better about that,
+    // as tags can be not just one worded.
+    if (
+        event.currentTarget.value.includes(" ") &&
+        (event.target.name === "tags" ||
+            event.target.name === "sendTo" ||
+            event.target.name === "sendType")
+    ) {
+        event.currentTarget.value = event.currentTarget.value.replace(
+            /\s/g,
+            ""
+        );
+    }
+    const value = event.target.value;
+
+    switch (event.target.name) {
+        case "tags":
+            dispatch(updateTags(value.toLocaleLowerCase()));
+            return;
+        case "config":
+            dispatch(updateConfig(value));
+            return;
+        case "sendTo":
+            dispatch(updateSendTo(value.toLocaleLowerCase()));
+            return;
+        case "sendType":
+            dispatch(updateSendType(value));
+            return;
+        default:
+            return;
+    }
+}
+
 export const submitHandle = () => (dispatch, getState) => {
     const {config, sendTo, sendType} = getState().SendTagReducer.SendTagReducers;
 

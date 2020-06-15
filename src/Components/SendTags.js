@@ -3,12 +3,9 @@ import "../Styles/sendTags.scss";
 import dompurify from "dompurify";
 import { useSelector, useDispatch } from "react-redux";
 import {
-    updateTags,
-    updateConfig,
-    updateSendTo,
-    updateSendType,
     updateSent,
     clearInput,
+    changeHandle,
     submitHandle,
     resetRecipients,
     checkForErrors,
@@ -19,11 +16,9 @@ import Modal from "./Modal";
 export default function SendTags() {
     const {
         tags,
-        //sent,
         sendType,
         config,
         sendTo,
-        //recipients,
         errors,
     } = useSelector((state) => state.SendTagReducer.SendTagReducers);
 
@@ -39,37 +34,7 @@ export default function SendTags() {
     const dispatch = useDispatch();
 
     const handleChange = (event) => {
-        // Checking for spaces in TAGS and SEND TO but need think better about that,
-        // as tags can be not just one worded.
-        if (
-            event.currentTarget.value.includes(" ") &&
-            (event.target.name === "tags" ||
-                event.target.name === "sendTo" ||
-                event.target.name === "sendType")
-        ) {
-            event.currentTarget.value = event.currentTarget.value.replace(
-                /\s/g,
-                ""
-            );
-        }
-        const value = event.target.value;
-
-        switch (event.target.name) {
-            case "tags":
-                dispatch(updateTags(value.toLocaleLowerCase()));
-                return;
-            case "config":
-                dispatch(updateConfig(value));
-                return;
-            case "sendTo":
-                dispatch(updateSendTo(value.toLocaleLowerCase()));
-                return;
-            case "sendType":
-                dispatch(updateSendType(value));
-                return;
-            default:
-                return;
-        }
+        dispatch(changeHandle(event));
     };
 
     const handleSubmit = async (event) => {
