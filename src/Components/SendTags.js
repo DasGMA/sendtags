@@ -39,9 +39,6 @@ export default function SendTags() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        /*  implement me
-            hint: we will probably need to update state here to render the right parts
-        */
 
         if (dispatch(checkForErrors()) === false) {
             dispatch(submitHandle());
